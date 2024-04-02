@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 var formidable = require('formidable');
 const path = require('path');
-const { deepStrictEqual } = require('assert');
 
 
 // login get request
@@ -11,10 +10,10 @@ exports.getLogin = (req, res, next) => {
     }
     else {
         var connectDB = mysql.createConnection({
-            host: "localhost",
-            user: "root",
-            password: "",
-            database: "hotel"
+            host: process.env.DB_HOST,
+            user: process.env.DB_USERNAME,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_DBNAME
         });
         data1 = "SELECT * " +
             "FROM  bookingstatus " +
@@ -37,10 +36,10 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
     data = "SELECT * " +
@@ -81,10 +80,10 @@ exports.postChnageStatus = (req, res, next) => {
     //console.log(req.body);
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
     var value = 0;
@@ -138,10 +137,10 @@ exports.getAddHotel = (req, res, next) => {
 exports.postAddHotel = (req, res, next) => {
    
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
     //var
@@ -233,10 +232,10 @@ exports.postSearch = (req, res, next) => {
     //console.log(req.body);
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
     data = "SELECT * " +
@@ -257,10 +256,10 @@ exports.postSearch = (req, res, next) => {
 exports.getUpdate = (req, res, next) => {
     // console.log(req.body);
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
     data = "SELECT * " +
@@ -283,10 +282,10 @@ exports.getUpdate = (req, res, next) => {
 exports.updatePrevData = (req, res, next) => {
 
     var connectDB = mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "hotel"
+        host: process.env.DB_HOST,
+        user: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_DBNAME
     });
 
 /* this is the UPDATE THE RESORT'S Info */
@@ -319,3 +318,4 @@ exports.logout = (req, res, next) => {
     req.session.destroy();
     res.render('admin/login', { msg: "", err: "" });
 }
+
