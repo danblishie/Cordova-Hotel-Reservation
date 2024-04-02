@@ -34,10 +34,10 @@ exports.getLogin = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
 
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
 
    data = "SELECT * " +
@@ -72,10 +72,10 @@ exports.getCreateAccount = (req, res, next) => {
 exports.postCreateAccount = (req, res, next) => {
 
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
 
    var p1 = req.body.pass;
@@ -106,10 +106,10 @@ exports.getCategory = (req, res, next) => {
 exports.postCategory = (req, res, next) => {
    //console.log(req.body);
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
 
    data = "SELECT * " +
@@ -135,19 +135,17 @@ exports.postBooking = (req, res, next) => {
    res.render('user/bookingConfirm.ejs', { user: req.session.mail, name: req.body.name, type: req.body.type, cost: req.body.cost });
 }
 
- //post status request
+//post status request
 
 exports.postStatus = (req, res, next) => {
 
    //console.log(req.body);
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
-
-   // old code
    var date = req.body.date;
    //console.log(date)
    data = "INSERT INTO bookingstatus " +
@@ -156,30 +154,6 @@ exports.postStatus = (req, res, next) => {
    data1 = "SELECT * " +
       " FROM  bookingstatus " +
       " WHERE email = " + mysql.escape(req.session.mail);
-
-      connectDB.query(data, (err, reslt) => {
-         if (err) throw err;
-         else {
-            connectDB.query(data1, (err1, result) => {
-               for (i in result) {
-                  var a = result[i].date
-                  a = a.toString()
-                  result[i].date = a.slice(0, 15);
-               }
-               res.render('user/statusShow', { user: req.session.mail, msg: "Your booking is placed", err: "", data: result });
-            })
-         }
-      })
-   }
-
-/*    var date = req.body.checkin_datetime;
-   data = "INSERT INTO bookingstatus " +
-         " VALUES ('" + req.session.mail + "','" + req.body.name + "','" + req.body.type + "','" + req.body.roomWant + "','" + 0 + "','" + date + "','" + req.body.checkout_datetime + "')";
-   
-   data1 = "SELECT * " +
-         " FROM  bookingstatus " +
-         " WHERE email = " + mysql.escape(req.session.mail);
-   
       
    connectDB.query(data, (err, reslt) => {
       if (err) throw err;
@@ -195,16 +169,16 @@ exports.postStatus = (req, res, next) => {
       }
    })
 }
- */
+
 
 //get status
 exports.getShowStatus = (req, res, next) => {
 
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
 
    data = "SELECT * " +
@@ -235,10 +209,10 @@ exports.getShowStatus = (req, res, next) => {
 exports.deleteBooking =(req,res,next)=>{
    //console.log(req.body);
    var connectDB = mysql.createConnection({
-      host: "localhost",
-      user: "root",
-      password: "",
-      database: "hotel"
+      host: process.env.DB_HOST,
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DBNAME
    });
 
    data = "DELETE FROM bookingstatus " +
