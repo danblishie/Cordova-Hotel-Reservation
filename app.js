@@ -29,4 +29,8 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(userRouter);
 app.use("/admin" ,adminRouter);
 
-app.listen(3000, () => console.log("Server listening on http://localhost:3000"));
+// Start the server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
