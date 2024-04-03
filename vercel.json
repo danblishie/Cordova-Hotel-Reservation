@@ -1,15 +1,14 @@
 {
+    "name": "my-nodejs-project",
     "version": 2,
     "builds": [
-      {
-        "src": "./app.js",
-        "use": "@vercel/node"
-      }
+      { "src": "app.js", "use": "@vercel/node" }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "destination": "/"
-      }
-    ]
-}
+      { "src": "/", "dest": "app.js" }
+    ],
+    "env": {
+      "NODE_ENV": "production"
+    }
+  }
+  
